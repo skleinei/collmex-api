@@ -9,7 +9,7 @@ import java.io.IOException;
  */
 public class App {
 
-    Collmex collmex = new Collmex("128733", "user", "pass", 1);
+    Collmex collmex = new Collmex("128733", "stefan", "stefan", 1);
 
 
     public static void main(String[] args) throws IOException {
@@ -30,7 +30,24 @@ public class App {
                                 .positionstyp(Angebot.Position.Typ.NORMAL_POSITION)
                                 .produktnummer(produktnummer)
                                 .produktbeschreibung(positionstext)
+                                .einzelpreis(111.20F)
                                 .menge(1)
+                )
+                .addPosition(
+                        Angebot.neuePosition()
+                                .positionstyp(Angebot.Position.Typ.NORMAL_POSITION)
+                                .produktnummer("5")
+                                .produktbeschreibung("1asdfasdf")
+                                .einzelpreis(333.20F)
+                                .menge(1)
+                )
+                .addPosition(
+                        Angebot.neuePosition()
+                                .positionstyp(Angebot.Position.Typ.NORMAL_POSITION)
+                                .produktnummer("5")
+                                .produktbeschreibung("2asdfasdf")
+                                .einzelpreis(333.20F)
+                                .menge(3)
                 );
 
         collmex.create(angebot);

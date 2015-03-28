@@ -10,7 +10,6 @@ import java.util.List;
 
 public class Angebot extends Datensatz {
 
-    private static final String _ = ";";
     private static final String SATZART = "CMXQTN";
     private Integer angebotsnummer;
     private final Integer firmaNr;
@@ -74,8 +73,8 @@ public class Angebot extends Datensatz {
             pos++;
 
             csv += field("Satzart", Typ.C, null, SATZART);
-            csv += field("Angebotsnummer", Typ.I, 8, angebotsnummer);
-            csv += field("Position", Typ.I, 8, pos);
+            csv += field("Angebotsnummer", Typ.I, 8, -1);
+            csv += field("Position", Typ.I, 8, pos * 10);
             csv += field("Angebotsart", Typ.I, 8);
             csv += field("Firma Nr", Typ.I, 8, firmaNr);
             csv += field("Kunden-Nr", Typ.I, 8, kundenNr);
@@ -159,6 +158,7 @@ public class Angebot extends Datensatz {
             csv += field("Kosten", Typ.M, 18);
             csv += field("Rohertrag", Typ.M, 18);
             csv += field("Marge", Typ.M, 18);
+            csv += "\n";
         }
 
         return csv;
@@ -219,7 +219,7 @@ public class Angebot extends Datensatz {
 
 
         public Position einzelpreis(Float einzelpreis) {
-            this.einzelpreis = einzelpreis * 100;
+            this.einzelpreis = einzelpreis;
             return this;
         }
 

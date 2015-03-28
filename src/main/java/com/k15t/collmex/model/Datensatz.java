@@ -2,6 +2,7 @@ package com.k15t.collmex.model;
 
 import org.joda.time.DateTime;
 
+import java.text.NumberFormat;
 import java.util.Locale;
 
 
@@ -26,11 +27,11 @@ public abstract class Datensatz {
             case I:
                 return (value != null ? String.valueOf(value) : "") + ";";
             case N:
-                return (value != null ? String.valueOf(value) + "\"" : "") + ";";
+                return (value != null ? NumberFormat.getInstance(Locale.GERMAN).format(value) : "") + ";";
             case D:
                 return (value != null ? ((DateTime) value).toString("yyyyMMdd", Locale.GERMAN) : "") + ";";
             case M:
-                return (value != null ? String.valueOf(value) + "\"" : "") + ";";
+                return (value != null ? NumberFormat.getInstance(Locale.GERMAN).format(value) : "") + ";";
             case T:
                 throw new IllegalArgumentException("Data type 'T' is not yet implemented");
             default:

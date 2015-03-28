@@ -1,11 +1,17 @@
 package com.k15t.collmex;
 
 import com.k15t.collmex.model.Angebot;
+import com.k15t.collmex.model.CollmexDataException;
 import com.k15t.collmex.model.Datensatz;
+import com.opencsv.CSVReader;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.entity.ContentType;
 
 import java.io.IOException;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Collmex {
@@ -25,6 +31,11 @@ public class Collmex {
     }
 
 
+    public <T> List<T> find(Class<T> c) {
+        return new ArrayList<T>();
+    }
+
+
     public void create(Datensatz... datensaetze) throws IOException {
         String csvInput = createLoginDatensatz();
 
@@ -41,6 +52,18 @@ public class Collmex {
                 .asString();
 
         System.out.println(csvOutput);
+        checkOutput(csvOutput);
+    }
+
+
+    private void checkOutput(String csvOutput) throws IOException {
+        CSVReader csvReader = new CSVReader(new StringReader(csvOutput), ';');
+        String[] firstLine = csvReader.readNext();
+
+        if ("E".equals(firstLine[1]) || "W".equals(firstLine[1])) {
+            throw new CollmexDataException(firstLine[1], firstLine[2], firstLine[3],
+                    NumberUtils.createInteger(firstLine[4]));
+        }
     }
 
 
