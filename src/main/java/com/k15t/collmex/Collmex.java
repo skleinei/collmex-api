@@ -1,26 +1,31 @@
 package com.k15t.collmex;
 
-import com.k15t.collmex.model.Angebot;
-import com.k15t.collmex.model.CollmexDataException;
-import com.k15t.collmex.model.Datensatz;
 import com.opencsv.CSVReader;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.entity.ContentType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class Collmex {
+
+    private static final Logger logger = LoggerFactory.getLogger(Collmex.class);
 
     private String collmexKundenNr;
     private String user;
     private String password;
 
     private Integer firmaNr;
+
+    private Boolean screenScrapingEnabled;
 
 
     public Collmex(String collmexKundenNr, String user, String password, Integer firmaNr) {
@@ -31,39 +36,74 @@ public class Collmex {
     }
 
 
+    public Collmex(String collmexKundenNr, String user, String password, Integer firmaNr, Boolean screenScrapingEnabled) {
+        this.collmexKundenNr = collmexKundenNr;
+        this.user = user;
+        this.password = password;
+        this.firmaNr = firmaNr;
+        this.screenScrapingEnabled = screenScrapingEnabled;
+    }
+
+
     public <T> List<T> find(Class<T> c) {
         return new ArrayList<T>();
     }
 
 
-    public void create(Datensatz... datensaetze) throws IOException {
+    public void save(Datensatz... datensaetze) throws IOException {
         String csvInput = createLoginDatensatz();
 
         for (Datensatz datensatz : datensaetze) {
+            datensatz.firmaNr(firmaNr);
             csvInput += datensatz.toCsv();
         }
 
-        System.out.println(csvInput);
+        logger.debug(csvInput);
 
-        String csvOutput = Request.Post(getUrl())
+        logger.info("Sending CSV to Collmex.");
+        String csvOutput = Request.Post(getBaseUrl() + ",0,data_exchange")
                 .bodyString(csvInput, ContentType.create("text/csv", "ISO-8859-1"))
                 .execute()
                 .returnContent()
                 .asString();
 
-        System.out.println(csvOutput);
-        checkOutput(csvOutput);
+        logger.debug(csvOutput);
+
+        checkOutputAndUpdateIds(csvOutput, datensaetze);
+
+        if (screenScrapingEnabled) {
+            logger.info("Screen scraping Collmex.");
+            for (Datensatz datensatz : datensaetze) {
+                if (datensatz.needsScreenScraping()) {
+                    datensatz.getScreenScaper(this).start();
+                }
+            }
+        }
     }
 
 
-    private void checkOutput(String csvOutput) throws IOException {
-        CSVReader csvReader = new CSVReader(new StringReader(csvOutput), ';');
-        String[] firstLine = csvReader.readNext();
+    private void checkOutputAndUpdateIds(String csvOutput, Datensatz... datensaetze) throws IOException {
+        Map<Integer, Integer> temp2RealIdMap = new HashMap<Integer, Integer>();
 
-        if ("E".equals(firstLine[1]) || "W".equals(firstLine[1])) {
-            throw new CollmexDataException(firstLine[1], firstLine[2], firstLine[3],
-                    NumberUtils.createInteger(firstLine[4]));
+        CSVReader reader = new CSVReader(new StringReader(csvOutput), ';');
+
+        String [] csvLine;
+        while ((csvLine = reader.readNext()) != null) {
+            if (Satzart.MESSAGE.equals(csvLine[0])) {
+                if ("E".equals(csvLine[1]) || "W".equals(csvLine[1])) {
+                    throw new CollmexDataException(csvLine[1], csvLine[2], csvLine[3], NumberUtils.createInteger(csvLine[4]));
+                } else {
+                    logger.info("SUCCESS ({}): {}", csvLine[3], csvLine[2]);
+                }
+            } else if (Satzart.NEW_OBJECT_ID.equals(csvLine[0])) {
+                temp2RealIdMap.put(NumberUtils.createInteger(csvLine[2]), NumberUtils.createInteger(csvLine[1]));
+            }
         }
+
+        for (Datensatz datensatz : datensaetze) {
+            datensatz.id(temp2RealIdMap.get(datensatz.id()));
+        }
+
     }
 
 
@@ -72,18 +112,17 @@ public class Collmex {
     }
 
 
-    private String getUrl() {
-        return "https://www.collmex.de/cgi-bin/cgi.exe?" + collmexKundenNr + ",0,data_exchange";
+    public String getBaseUrl() {
+        return "https://www.collmex.de/cgi-bin/cgi.exe?" + collmexKundenNr;
     }
 
 
-    public Integer getFirmaNr() {
-        return firmaNr;
+    public String getUser() {
+        return user;
     }
 
 
-    public Angebot neuesAngebot() {
-        return new Angebot(this);
+    public String getPassword() {
+        return password;
     }
-
 }

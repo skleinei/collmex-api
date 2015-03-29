@@ -1,4 +1,4 @@
-package com.k15t.collmex.model;
+package com.k15t.collmex;
 
 
 public class CollmexDataException extends RuntimeException {
