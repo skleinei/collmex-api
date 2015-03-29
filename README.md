@@ -48,8 +48,8 @@ does some screen scraping to update those fields as well.
 
 ### Links & Resources
 
-* Collmex: Collmex API,\\URL: http://www.collmex.de/cgi-bin/cgi.exe?1005,1,help,api
-* Collmex: Daten importieren,\\URL: http://www.collmex.de/cgi-bin/cgi.exe?1005,1,help,daten_importieren
+* Collmex Documenation: [Collmex API](http://www.collmex.de/cgi-bin/cgi.exe?1005,1,help,api)
+* Collmex Documenation: [Daten importieren](http://www.collmex.de/cgi-bin/cgi.exe?1005,1,help,daten_importieren)
 
 ### Building and Developing
 
