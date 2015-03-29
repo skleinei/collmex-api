@@ -3,8 +3,8 @@
 collmex-api is a Java API for German Collmex Accounting software. To make the API simpler to understand
 it uses the German terminology from the Collmex API.
 
-**Status:** collmex-api is far from complete API support, currently it just support creating Angebot 
-(quotes)
+:information_source: **Status:** collmex-api is far from complete API support, currently it just support creating Angebot 
+(quotes). Next steps would be: Support querying data records, and support additional datatypes.
 
 ## Getting Started
 
