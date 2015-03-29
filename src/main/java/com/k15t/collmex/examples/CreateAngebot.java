@@ -1,5 +1,6 @@
-package com.k15t.collmex;
+package com.k15t.collmex.examples;
 
+import com.k15t.collmex.Collmex;
 import com.k15t.collmex.angebot.Angebot;
 import com.k15t.collmex.angebot.Position;
 
@@ -8,15 +9,15 @@ import java.io.IOException;
 
 /**
  */
-public class Example1 {
+public class CreateAngebot {
 
     Collmex collmex = new Collmex("128733", "user", "pass", 1, true);
 
 
     public static void main(String[] args) throws IOException {
 
-        Example1 example1 = new Example1();
-        example1.run();
+        CreateAngebot createAngebot = new CreateAngebot();
+        createAngebot.run();
     }
 
 

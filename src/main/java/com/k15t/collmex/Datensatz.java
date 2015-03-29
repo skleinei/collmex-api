@@ -50,7 +50,7 @@ public abstract class Datensatz {
 
 
     public static void validate(String name, Datentyp datentyp, Integer max, Object value) {
-
+        // TODO validation
     }
 
 
