@@ -25,6 +25,7 @@ Angebot angebot = Angebot.create(-1)
                         .menge(1.0)
                         .kosten(11.1)
         )
+collmex.save(angebot);
 ```
 
 ## Features
@@ -40,13 +41,12 @@ does some screen scraping to update those fields as well.
 
 ## Users
 
-* [![K15t Software GmbH](https://www.k15t.com/_/5BFA73E9014B6A2875A0459873CB3E3D/1423415211446/images/header_logo.png)](http://www.k15t.com)
-* Please contact me, if you
+[![K15t Software GmbH](https://www.k15t.com/_/5BFA73E9014B6A2875A0459873CB3E3D/1423415211446/images/header_logo.png)](http://www.k15t.com)
 
 ## More Information
 
-* Collmex GmbH: Collmex API Description [http://www.collmex.de/cgi-bin/cgi.exe?1005,1,help,api]
-* Collmex GmbH: Daten importieren [http://www.collmex.de/cgi-bin/cgi.exe?1005,1,help,daten_importieren] 
+* Collmex: Collmex API,\\URL: http://www.collmex.de/cgi-bin/cgi.exe?1005,1,help,api
+* Collmex: Daten importieren,\\URL: http://www.collmex.de/cgi-bin/cgi.exe?1005,1,help,daten_importieren 
 
 ## License
 
@@ -58,4 +58,4 @@ collmex-api can be easily build with Java 7 and Maven 3. There are a few depende
 notable HTMLUnit which is used for screen scraping.
 
 To add additional data types please check out [createDatensatz.js](./createDatensatz.js), which 
- 
+is essential to turn the data record documentation into Java files.
