@@ -1,15 +1,14 @@
 // This code create the implementation code for Datensatz implementations
 // of the Collmex API, and saves it in the clipboard. To use this, open a
-// description in the Collmex API documentation and execute this script
-// in the Chrome Dev Tools.
+// description in the Collmex API documentation, fiddle with the "datansatz"
+// variable in the script and execute in the Chrome Dev Tools.
 //
-// The following manual clean up needs to be done:
+// The following manual clean up needs to be done afterwards:
 // * Check for compiler errors (obviously)
 // * Check which fields are read- or export-only and remove the setters.
-// * If the export-only fields will be made writeable through the extended
-//   API (a.k.a. screen-scraping), add a leading 'x_'.
 // * Remove setter for satzart, define a constant in com.k15t.collmex.model.Satzart,
 //   and us in getter for satzart.
+// * Check if certain fields should be made writable through screen scrapers.
 
 
 var datensatz = {
@@ -39,7 +38,7 @@ var datensatz = {
 
 // === don't change below here =======
 
-window.copyToClipboard = function () {
+window.copyJavaToClipboard = function () {
     var $ = window.jQuery;
 
     var typeMap = {
@@ -162,7 +161,7 @@ if (typeof(jQuery) === 'undefined') {
     var script = document.createElement('script');
     script.setAttribute('src', 'https://code.jquery.com/jquery.js');
     document.getElementsByTagName('body')[0].appendChild(script);
-    script.onload = window.copyToClipboard;
+    script.onload = window.copyJavaToClipboard;
 } else {
-    window.copyToClipboard();
+    window.copyJavaToClipboard();
 }

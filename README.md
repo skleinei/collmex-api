@@ -3,8 +3,9 @@
 collmex-api is a Java API for German Collmex Accounting software. To make the API simpler to understand
 it uses the German terminology from the Collmex API.
 
-:information_source: **Status:** collmex-api is far from complete API support, currently it just support creating Angebot 
-(quotes). Next steps would be: Support querying data records, and support additional datatypes.
+:information_source: collmex-api is far from complete API support, currently it just support creating Angebot 
+(quotes). Next steps would be: Support querying data records, support additional datatypes, and write tests
+(especially for the screen scraping part).
 
 ## Getting Started
 
@@ -39,23 +40,25 @@ As seen above the API has a nice fluent API.
 Some fields such as "Kosten manuell" can not be updated via the Collmex API. Therefore collmex-api
 does some screen scraping to update those fields as well.
 
-## Users
+## Additional Information
+
+### Users
 
 [![K15t Software GmbH](https://www.k15t.com/_/5BFA73E9014B6A2875A0459873CB3E3D/1423415211446/images/header_logo.png)](http://www.k15t.com)
 
-## More Information
+### Links & Resources
 
 * Collmex: Collmex API,\\URL: http://www.collmex.de/cgi-bin/cgi.exe?1005,1,help,api
-* Collmex: Daten importieren,\\URL: http://www.collmex.de/cgi-bin/cgi.exe?1005,1,help,daten_importieren 
+* Collmex: Daten importieren,\\URL: http://www.collmex.de/cgi-bin/cgi.exe?1005,1,help,daten_importieren
 
-## License
-
-Licensed under the Apache License, Version 2.0
-
-## Building and Developing
+### Building and Developing
 
 collmex-api can be easily build with Java 7 and Maven 3. There are a few dependencies most
 notable HTMLUnit which is used for screen scraping.
 
 To add additional data types please check out [createDatensatz.js](./createDatensatz.js), which 
-is essential to turn the data record documentation into Java files.
+is essential to turn the data record documentation into Java files.                                     
+
+## License
+
+Licensed under the Apache License, Version 2.0
