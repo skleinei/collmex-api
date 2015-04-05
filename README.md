@@ -61,4 +61,4 @@ is essential to turn the data record documentation into Java files.
 
 ## License
 
-Licensed under the Apache License, Version 2.0
+Licensed under The MIT License (MIT).
