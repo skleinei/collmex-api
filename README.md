@@ -44,7 +44,7 @@ does some screen scraping to update those fields as well.
 
 ### Users
 
-[![K15t Software GmbH](https://www.k15t.com/_/5BFA73E9014B6A2875A0459873CB3E3D/1423415211446/images/header_logo.png)](http://www.k15t.com)
+[![K15t Software GmbH](https://www.k15t.com/_/5BFA73E90151AA28368C3B0C11447E09/1454422141025/img/common/logo_k15t.png)](http://www.k15t.com)
 
 ### Links & Resources
 
