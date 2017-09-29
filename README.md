@@ -4,8 +4,7 @@ collmex-api is a Java API for German Collmex Accounting software. To make the AP
 it uses the German terminology from the Collmex API.
 
 :information_source: collmex-api is far from complete API support, currently it just support creating Angebot 
-(quotes). Next steps would be: Support querying data records, support additional datatypes, and write tests
-(especially for the screen scraping part).
+(quotes). Next steps would be: Support querying data records, support additional datatypes, and write tests.
 
 ## Getting Started
 
@@ -35,11 +34,6 @@ collmex.save(angebot);
 
 As seen above the API has a nice fluent API.
 
-### Extended API via Screen Scraping
-
-Some fields such as "Kosten manuell" can not be updated via the Collmex API. Therefore collmex-api
-does some screen scraping to update those fields as well.
-
 ## Additional Information
 
 ### Users
@@ -53,8 +47,7 @@ does some screen scraping to update those fields as well.
 
 ### Building and Developing
 
-collmex-api can be easily build with Java 7 and Maven 3. There are a few dependencies most
-notable HTMLUnit which is used for screen scraping.
+collmex-api can be easily build with Java 7 and Maven 3. 
 
 To add additional data types please check out [createDatensatz.js](./createDatensatz.js), which 
 is essential to turn the data record documentation into Java files.                                     
