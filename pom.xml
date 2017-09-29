@@ -1,11 +1,16 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.k15t.collmex</groupId>
     <artifactId>collmex-api</artifactId>
     <packaging>jar</packaging>
     <version>0.2-SNAPSHOT</version>
     <name>collmex-api</name>
+
+    <scm>
+        <connection>scm:git:https://github.com/skleinei/collmex-api</connection>
+        <developerConnection>scm:git:https://github.com/skleinei/collmex-api</developerConnection>
+        <url>https://github.com/skleinei/collmex-api</url>
+    </scm>
 
     <dependencies>
         <dependency>
