@@ -33,6 +33,7 @@ public class Position {
     private Double kosten;
     private Double rohertrag;
     private Double marge;
+    private Double kostenManuell;
 
     Angebot angebot;
     boolean needsScreenScraping;
@@ -295,11 +296,10 @@ public class Position {
      * be as stable as the API.
      * <p/>
      * <b>Note:</b> You have to switch on the extended via
-     * {@link Collmex#Collmex(java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.Boolean)}
+     * {@link Collmex#Collmex(java.lang.String, java.lang.String, java.lang.String, java.lang.Integer)}
      * to enable screen-scraping.
      */
     public Position kosten(Double kosten) {
-        this.needsScreenScraping = true;
         Datensatz.validate("kosten", Datensatz.Datentyp.M, 18, kosten);
         this.kosten = kosten;
         return this;
@@ -312,6 +312,17 @@ public class Position {
      */
     public Double kosten() {
         return this.kosten;
+    }
+
+    public Position kostenManuell(Double kosten) {
+        this.kostenManuell = kosten;
+        return this;
+    }
+
+
+
+    public Double kostenManuell() {
+        return this.kostenManuell;
     }
 
 

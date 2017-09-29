@@ -34,12 +34,6 @@ public abstract class Datensatz {
     public abstract Datensatz firmaNr(Integer firmaNr);
 
 
-    public abstract Boolean needsScreenScraping();
-
-
-    public abstract Screenscraper getScreenScaper(Collmex collmex);
-
-
     public abstract void id(Integer id);
 
 

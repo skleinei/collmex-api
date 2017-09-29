@@ -1,7 +1,10 @@
 // This code create the implementation code for Datensatz implementations
-// of the Collmex API, and saves it in the clipboard. To use this, open a
-// description in the Collmex API documentation, fiddle with the "datansatz"
-// variable in the script and execute in the Chrome Dev Tools.
+// of the Collmex API, and saves it to the clipboard.
+//
+// To use this:
+// # Log into your collmex account and click "hilfe"
+// # Search for "Satzbeschreibung" and select a "Satzbeschreibung".
+// # Fiddle with the "datensatz" variable in the script and execute in the Dev Tools.
 //
 // The following manual clean up needs to be done afterwards:
 // * Check for compiler errors (obviously)
@@ -152,7 +155,7 @@ window.copyJavaToClipboard = function () {
     text += '    }\n';
     text += '\n';
 
-    copy(text);
+    window.copy(text);
 
 };
 

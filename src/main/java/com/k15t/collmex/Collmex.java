@@ -25,23 +25,12 @@ public class Collmex {
 
     private Integer firmaNr;
 
-    private Boolean screenScrapingEnabled;
-
 
     public Collmex(String collmexKundenNr, String user, String password, Integer firmaNr) {
         this.collmexKundenNr = collmexKundenNr;
         this.user = user;
         this.password = password;
         this.firmaNr = firmaNr;
-    }
-
-
-    public Collmex(String collmexKundenNr, String user, String password, Integer firmaNr, Boolean screenScrapingEnabled) {
-        this.collmexKundenNr = collmexKundenNr;
-        this.user = user;
-        this.password = password;
-        this.firmaNr = firmaNr;
-        this.screenScrapingEnabled = screenScrapingEnabled;
     }
 
 
@@ -70,15 +59,6 @@ public class Collmex {
         logger.debug(csvOutput);
 
         checkOutputAndUpdateIds(csvOutput, datensaetze);
-
-        if (screenScrapingEnabled) {
-            logger.info("Screen scraping Collmex.");
-            for (Datensatz datensatz : datensaetze) {
-                if (datensatz.needsScreenScraping()) {
-                    datensatz.getScreenScaper(this).start();
-                }
-            }
-        }
     }
 
 

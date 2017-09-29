@@ -1,9 +1,7 @@
 package com.k15t.collmex.angebot;
 
-import com.k15t.collmex.Collmex;
 import com.k15t.collmex.Datensatz;
 import com.k15t.collmex.Satzart;
-import com.k15t.collmex.Screenscraper;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
@@ -93,18 +91,6 @@ public class Angebot extends Datensatz {
     }
 
 
-    @Override
-    public Boolean needsScreenScraping() {
-        for (Position position : positionen) {
-            if (position.needsScreenScraping) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-
     public Angebot addPosition(Position position) {
         // TODO: Check duplicate position
         // validate that position.position() is not duplicate. If it is
@@ -122,12 +108,6 @@ public class Angebot extends Datensatz {
 
 
     @Override
-    public Screenscraper getScreenScaper(Collmex collmex) {
-        return new AngebotScreenscraper(this, collmex);
-    }
-
-
-    @Override
     public void id(Integer id) {
         validate("angebotsnummer", Datentyp.I, 8, angebotsnummer);
         this.angebotsnummer = id;
@@ -140,7 +120,7 @@ public class Angebot extends Datensatz {
     }
 
 
-    //    public Angebot angebotsnummer(Integer angebotsnummer) {
+//    public Angebot angebotsnummer(Integer angebotsnummer) {
 //        validate("angebotsnummer", Datentyp.I, 8, angebotsnummer);
 //        this.angebotsnummer = angebotsnummer;
 //        return this;
@@ -1086,6 +1066,7 @@ public class Angebot extends Datensatz {
             csv += toCsvField("Kosten", Datentyp.M, position.kosten());
             csv += toCsvField("Rohertrag", Datentyp.M, position.rohertrag());
             csv += toCsvField("Marge", Datentyp.M, position.marge());
+            csv += toCsvField("Kosten Manuell", Datentyp.M, position.kostenManuell());
             csv += "\n";
         }
 
